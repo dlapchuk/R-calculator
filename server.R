@@ -212,7 +212,7 @@ shinyServer(function(input,output,session){
     updateSelectInput(
       session,
       "y_input",
-      choices=names(df))
+      choices=names(data()))
   })
   
   output$distPlot <- renderPlot({
