@@ -334,11 +334,12 @@ shinyServer(function(input,output,session){
     if(is.null(data()))
       h5("Upload data to start")
     else
-      tabsetPanel(tabPanel("About file", tableOutput("filedf")),
+      tabsetPanel(
                   tabPanel("Data", tableOutput("table")),
                   tabPanel("Summary", tableOutput("sum")), 
                   tabPanel("Histogram", plotOutput("distPlot")),
                   tabPanel("Imbalance coef", tableOutput("result")),
-                  tabPanel("Algorithm", tableOutput("algorithm")))
+                  tabPanel("Algorithm", tableOutput("algorithm")),
+                  tabPanel("Predict", tableOutput("predict")))
   })
 })

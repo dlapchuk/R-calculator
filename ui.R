@@ -34,7 +34,9 @@ shinyUI(fluidPage(
                     "RandomForest" = "RF",
                     "Xgboost" = "xgboost",
                     "LogisticRegression" = "LG",
-                    "KNN" = "knn"))
+                    "KNN" = "knn")),
+      fileInput("pred_file","Upload predict data"),
+      actionButton("export", "Export to", style='width:230px;')
       ),
     mainPanel(
       uiOutput("tb")
