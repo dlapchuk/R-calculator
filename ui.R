@@ -36,7 +36,8 @@ shinyUI(fluidPage(
                     "LogisticRegression" = "LG",
                     "KNN" = "knn")),
       fileInput("pred_file","Upload predict data"),
-      actionButton("export", "Export to", style='width:230px;')
+      downloadButton('download',"Download the data", style='width:230px;')
+     
       ),
     mainPanel(
       uiOutput("tb")

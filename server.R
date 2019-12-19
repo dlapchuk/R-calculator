@@ -24,6 +24,16 @@ shinyServer(function(input,output,session){
     
   })
   
+  thedata <- reactive(iris)
+  
+  output$dto <- renderDataTable({thedata()})
+  output$download <- downloadHandler(
+    filename = function(){"result.csv"}, 
+    content = function(fname){
+      write.csv(thedata(), fname)
+    }
+  )
+  
   # this reactive output contains the summary of the dataset and display the summary in table format
   output$filedf <- renderTable({
     if(is.null(data())){return ()}
