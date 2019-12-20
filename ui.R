@@ -1,8 +1,11 @@
 library(shiny)
+library(shinyalert)
 shinyUI(fluidPage(
+  useShinyalert(), 
   titlePanel("File Input"),
   sidebarLayout(
     sidebarPanel(
+      
       fileInput("file","Upload the file"), # fileinput() function is used to get the file upload contorl option
       helpText("Default max. file size is 600 MB"),
       tags$hr(),
@@ -36,7 +39,8 @@ shinyUI(fluidPage(
                     "LogisticRegression" = "LG",
                     "KNN" = "knn")),
       fileInput("pred_file","Upload predict data"),
-      downloadButton('download',"Download the data", style='width:230px;')
+      actionButton("predict", "Predict", style='width:230px;margin-bottom: 16px;'),
+      downloadButton('download',"Download the data", style='width:230px;'),
      
       ),
     mainPanel(

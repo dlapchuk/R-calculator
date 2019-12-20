@@ -15,6 +15,7 @@ options(shiny.maxRequestSize = 600*1024^2)
 
 shinyServer(function(input,output,session){
   
+  
   # This reactive function will take the inputs from UI.R and use them for read.table() to read the data from the file. It returns the dataset in the form of a dataframe.
   # file$datapath -> gives the path of the file
   data <- reactive({
@@ -24,13 +25,28 @@ shinyServer(function(input,output,session){
     
   })
   
-  thedata <- reactive(iris)
+  f <- reactive({
+    file2 <- input$pred_file
+    if(is.null(file2)){return()} 
+    fread(file=file2$datapath, stringsAsFactors = F,sep=",")
+    
+  })
   
-  output$dto <- renderDataTable({thedata()})
+    observeEvent(input$predict, {
+      showModal(modalDialog(
+        title = "Prediction",
+        "Prediction was made.",
+        easyClose = TRUE,
+        footer = NULL
+      ))
+    })
+  
+  
   output$download <- downloadHandler(
     filename = function(){"result.csv"}, 
     content = function(fname){
-      write.csv(thedata(), fname)
+      df_mod <- f()[1:5000,]
+      write.csv(df_mod, fname)
     }
   )
   
